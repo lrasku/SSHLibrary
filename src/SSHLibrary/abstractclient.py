@@ -655,7 +655,7 @@ class AbstractSSHClient(object):
         return client.get_file(source, destination, scp_preserve_times, self.config.path_separator)
 
     def _get_files_for_scp_all(self, source):
-        sources = self.execute_command('dir %s' % source)
+        sources = self.execute_command('printf "%%s\\n" %s' % source)
         result = sources[0].split('\n')
         result[:] = [x for x in result if x]  # remove empty empty entries
         return result
